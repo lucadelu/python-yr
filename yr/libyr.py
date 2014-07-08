@@ -62,10 +62,12 @@ class Yr:
         self.language_name = language_name
         self.language = Language(self.language_name)
         if location_name:
-            self.location_name, self.location_xyz = location_name, None
+            self.location_name = location_name
+            self.location_xyz = None
             self.location = Location(self.location_name, self.language)
         elif location_xyz:
-            self.location_name, self.location_xyz = None, location_xyz
+            self.location_name = None
+            self.location_xyz = location_xyz
             self.location = LocationXYZ(location_xyz[0], location_xyz[1], location_xyz[2])
         else:
             return YrException("location_name or location_xyz parameter must be set")
