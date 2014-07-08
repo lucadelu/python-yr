@@ -56,7 +56,6 @@ class Location(YrObject):
     def get_hash(self):
         return self.location_name.replace('/', '-')
 
-
 class LocationXYZ(YrObject):
     """Class to use the API of yr.no"""
     def __init__(self, x, y, z=0, language=Language()):
@@ -83,7 +82,6 @@ class LocationXYZ(YrObject):
     def get_hash(self):
         """Create an hash with the three coordinates"""
         return "location_{x}_{y}_{z}".format(x=self.x, y=self.y, z=self.z)
-
 
 class Connect(YrObject):
 
@@ -134,7 +132,6 @@ class Cache(YrObject):
     def load(self):
         with open(self.filename, mode='r', encoding=self.encoding) as f:
             return f.read()
-
 
 class YrCSV:
 
@@ -333,4 +330,4 @@ class YrCSV:
             of.close()
 
 if __name__ == '__main__':
-    print(Connect(Location('Czech_Republic/Prague/Prague')).read())
+    print(Connect(Location(location_name='Czech_Republic/Prague/Prague')).read())
