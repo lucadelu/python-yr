@@ -11,11 +11,8 @@ import re
 
 class YrObject: encoding = 'utf-8'
 
-class YrException(YrObject):
-
-    def __init__(self, error_message):
-        sys.stderr.write('python-yr: {error_message}\n'.format(error_message=error_message))
-        sys.exit(1)
+class YrException(Exception):
+    pass
 
 class Language(YrObject):
 
@@ -36,7 +33,7 @@ class Language(YrObject):
             with open(self.filename, mode='r', encoding=self.encoding) as f:
                 return json.load(f)
         else:
-            YrException('unavailable language ~> {language_name}'.format(language_name=self.language_name))
+            raise YrException('unavailable language ~> {language_name}'.format(language_name=self.language_name))
 
 class Location(YrObject):
 
@@ -96,9 +93,9 @@ class Connect(YrObject):
             try:
                 response = urllib.request.urlopen(self.location.url)
             except:
-                YrException('unavailable url ~> {url}'.format(url=self.location.url))
+                raise YrException('unavailable url ~> {url}'.format(url=self.location.url))
             if response.status != 200:
-                YrException('unavailable url ~> {url}'.format(url=self.location.url))
+                raise YrException('unavailable url ~> {url}'.format(url=self.location.url))
             weatherdata = response.read().decode(self.encoding)
             cache.dump(weatherdata)
         else:
