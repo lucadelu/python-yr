@@ -59,7 +59,6 @@ class LocationXYZ(YrObject):
     """Class to use the API of yr.no"""
     def __init__(self, x, y, z=0, language=Language()):
         """
-
         :param double x: longitude coordinate
         :param double y: latitude coordinate
         :param double z: altitude (meters above sea level)
